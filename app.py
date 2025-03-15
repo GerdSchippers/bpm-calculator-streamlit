@@ -53,9 +53,12 @@ st.success(f"**Te betalen BPM: € {netto_bpm:,.2f}**")
 def generate_pdf():
     pdf = FPDF()
     pdf.add_page()
+    
+    # Gebruik een lettertype dat UTF-8 ondersteunt
+    pdf.add_font('Arial', '', '/usr/share/fonts/truetype/msttcorefonts/Arial.ttf', uni=True)
     pdf.set_font("Arial", style='', size=12)
-    pdf.cell(200, 10, "BPM Berekening Resultaat", ln=True, align='C')
 
+    pdf.cell(200, 10, "BPM Berekening Resultaat", ln=True, align='C')
     pdf.cell(200, 10, f"Datum eerste toelating: {datum_toelating}", ln=True)
     pdf.cell(200, 10, f"CO2-uitstoot WLTP: {co2_wltp} g/km", ln=True)
     pdf.cell(200, 10, f"Bruto BPM: € {bruto_bpm:,.2f}", ln=True)
@@ -64,5 +67,6 @@ def generate_pdf():
     pdf.cell(200, 10, f"Te betalen BPM: € {netto_bpm:,.2f}", ln=True)
 
     return pdf.output(dest='S').encode('utf-8')
+
 
 st.download_button("Download berekening als PDF", data=generate_pdf(), file_name="BPM_Berekening.pdf", mime="application/pdf")
