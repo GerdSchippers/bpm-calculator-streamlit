@@ -77,11 +77,12 @@ def generate_pdf():
 
     pdf.cell(200, 10, f"Datum eerste toelating: {datum_toelating}", ln=True)
     pdf.cell(200, 10, f"CO2-uitstoot gebruikt: {co2_waarde} g/km", ln=True)
-    pdf.cell(200, 10, f"Bruto BPM: € {bruto_bpm:,.2f}", ln=True)
+    pdf.cell(200, 10, f"Bruto BPM: {chr(128)} {bruto_bpm:,.2f}", ln=True)  # Gebruik chr(128) voor €
     pdf.cell(200, 10, f"Afschrijvingsmethode: {afschrijfmethode}", ln=True)
     pdf.cell(200, 10, f"Afschrijvingspercentage: {afschrijvingspercent:.2f}%", ln=True)
-    pdf.cell(200, 10, f"Te betalen BPM: € {netto_bpm:,.2f}", ln=True)
+    pdf.cell(200, 10, f"Te betalen BPM: {chr(128)} {netto_bpm:,.2f}", ln=True)  # Gebruik chr(128) voor €
 
     return pdf.output(dest='S').encode('utf-8')
+
 
 st.download_button("Download berekening als PDF", data=generate_pdf(), file_name="BPM_Berekening.pdf", mime="application/pdf")
