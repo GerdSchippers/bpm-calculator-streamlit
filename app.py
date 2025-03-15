@@ -82,6 +82,6 @@ def generate_pdf():
     pdf.cell(200, 10, f"Afschrijvingspercentage: {afschrijvingspercent:.2f}%", ln=True)
     pdf.cell(200, 10, f"Te betalen BPM: € {netto_bpm:,.2f}", ln=True)
 
-    return pdf.output(dest='S').encode('latin-1')
+    return pdf.output(dest='S').encode('utf-8')
 
 st.download_button("Download berekening als PDF", data=generate_pdf(), file_name="BPM_Berekening.pdf", mime="application/pdf")
